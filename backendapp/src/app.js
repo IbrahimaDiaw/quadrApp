@@ -1,23 +1,18 @@
-console.log('Bonjour ')
+const express = require('express');
+const couchbase = require('couchbase');
+const cors = require('cors');
 
-const express = require('express')
-const bodyParser = require('body-parser')
-// const couchbase = require('couchbase')
-const cors = require('cors')
-const morgan = require('morgan')
+const app = express();
+const PORT = 5000;
 
-const app = express()
-// const bucket = (new couchbase.Cluster('http://localhost:8091')).openBucket('technique')
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
-app.use(morgan('combined'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
+const cluster = new couchbase.Cluster("couchbase://localhost:8091");
+cluster.authenticate('Ibrahima', 'password')
+const bucket = cluster.openBucket("technique");
+module.exports.bucket = bucket
+const routes = require('./route/router')(app);
 
-app.get('/byebye', function (req, res) {
-  res.send({
-    message: 'Test fonctionnement'
-  })
-})
-
-app.listen(process.env.PORT || 8081)
+app.listen(PORT, () => console.log(`Server running on port: http://localhost:${PORT}`));
