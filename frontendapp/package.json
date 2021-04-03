@@ -14,9 +14,13 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.21.2",
     "express": "^4.17.1",
-    "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue": "^2.6.12",
+    "vue-router": "^3.0.1",
+    "vuetify": "^2.4.9"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

@@ -9,9 +9,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-const cluster = new couchbase.Cluster("couchbase://localhost:8091");
+const cluster = new couchbase.Cluster("couchbase://localhost");
 cluster.authenticate('Ibrahima', 'password')
 const bucket = cluster.openBucket("technique");
+bucket.operationTimeout = 120 * 1000;
 module.exports.bucket = bucket
 const routes = require('./route/router')(app);
 

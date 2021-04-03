@@ -33,6 +33,22 @@ const appRouter = function (app) {
     })
   })
 
+  app.post('categories/:id', function (req, res) {
+    CategorieModel.getCategorieById(req.params.id, function (error, categorie) {
+      if (error) {
+        return res.status(400).send(error)
+      }
+      categorie.nom = req.body.nom
+      CategorieModel.create(categorie, function (error, result) {
+        if (error) {
+          console.log(error)
+          return res.status(400).send(error)
+        }
+        res.send(categorie)
+      })
+    })
+  })
+
   app.post('/categorie/delete/:id', function (req, res) {
     CategorieModel.deleteCategorieById(req.params.id, function (error, result) {
       if (error) {

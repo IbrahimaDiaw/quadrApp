@@ -22,7 +22,7 @@ ArticlesModel.create = function (data, callback) {
     created_at: (new Date()),
     type: 'articles'
   }
-  const id = data.id ? data.id : uuid.v4()
+  const id = uuid.v4()
   bucket.insert(id, articles, function (error, result) {
     if (error) {
       console.log(error)
