@@ -31,6 +31,9 @@
 <script>
 /* eslint-disable */
 import CategorieService from '@/services/Categorie'
+import SweetAlert from 'sweetalert2'
+
+const Swal = SweetAlert
 export default {
     data () {
         return {
@@ -43,10 +46,21 @@ export default {
         async CreateCategorie () {
             try {
                 await CategorieService.create (this.categorie)
+                Swal.fire({
+                position: 'middle',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+                })
+                this.listCategorie()
             }
             catch (error) {
                 console.log(error)
             }
+        },
+        async listCategorie(){
+           await this.$router.push({name:'Categorie'})
         }
     }
 }

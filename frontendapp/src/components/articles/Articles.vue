@@ -4,7 +4,7 @@
             <b-card  body-class="text-center" class="primary" header-tag="nav">
                 <template #header>
                 <b-nav card-header tabs>
-                    <h4> listes des Categorie</h4>
+                    <h4> listes de tous les articles</h4>
                     <div>
                         <v-btn class="cyan accent-2" @click="create"
                         slot="action"
@@ -33,7 +33,7 @@
                             <tr v-for="article in articles" :key="article.id">
                                 <td>{{ article.nom }}</td>
                                 <td>{{ article.created_at }}</td>
-                                <td><router-link :to="{name: 'UpdateArticle', params: { id: article._id }}" class="btn btn-primary">Edit</router-link>
+                                <td><router-link :to="{name: 'UpdateArticles', params: { id: article.id }}" class="btn btn-primary">Edit</router-link>
                                 <button class="btn btn-danger">Delete</button></td>
                             </tr>
                         </tbody>

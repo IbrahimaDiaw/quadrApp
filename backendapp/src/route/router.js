@@ -68,27 +68,29 @@ const appRouter = function (app) {
     })
   })
   app.post('/articles', function (req, res) {
-    ArticlesModel.create(req.body, function (error, articles) {
+    if (!req.body.nom) {
+      return res.status(400).send({ status: 'error', message: 'Le champs nom est obligatoire' })
+    }
+    if (!req.body.contenu) {
+      return res.status(400).send({ status: 'error', message: 'Le champs contenu est obligatoire' })
+    }
+    if (!req.body.categorie) {
+      return res.status(400).send({ status: 'error', message: 'Le champs categorie est obligatoire' })
+    }
+    ArticlesModel.create(req.body, function (error, result) {
       if (error) {
         return res.status(400).send(error)
       }
-      CategorieModel.getCategorieById(req.body, function (error, categorie) {
-        if (error) {
-          return res.status(400).send(error)
-        }
-        if (!categorie.articles) {
-          categorie.articles = []
-        }
-        categorie.articles.push(articles.id)
-        categorie.id = req.body.id
-        CategorieModel.create(categorie, function (error, result) {
-          if (error) {
-            console.log(error)
-            return res.status(400).send(error)
-          }
-          res.send(categorie)
-        })
-      })
+      res.send(result)
+    })
+  })
+
+  app.get('/articles/categories/:id', function (req, res) {
+    CategorieModel.getAllArticlesByCategories(req.params, function (error, result) {
+      if (error) {
+        return res.status(400).send(error)
+      }
+      res.send(result)
     })
   })
 }

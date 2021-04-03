@@ -20,6 +20,7 @@ ArticlesModel.create = function (data, callback) {
     nom: data.nom,
     contenu: data.contenu,
     created_at: (new Date()),
+    categorie: data.categorie,
     type: 'articles'
   }
   const id = uuid.v4()

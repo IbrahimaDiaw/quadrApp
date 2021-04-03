@@ -5,8 +5,8 @@ const bucket = require('../app').bucket
 function CategorieModel () {}
 
 CategorieModel.getAll = function (callback) {
-  const statement = 'SELECT META(categorie).id, categorie.*,' +
-  '(SELECT nom, created_at  FROM`' + bucket._name + '` USE KEYS categorie.articles) AS articles FROM `' + bucket._name + '` AS categorie WHERE categorie.type = "categorie"'
+  const statement = 'SELECT META(categorie).id, categorie.*' +
+  'FROM `' + bucket._name + '` AS categorie WHERE categorie.type = "categorie"'
   const query = N1qlQuery.fromString(statement)
   bucket.query(query, function (error, result) {
     if (error) {
@@ -45,6 +45,19 @@ CategorieModel.getCategorieById = function (data, callback) {
 CategorieModel.deleteCategorieById = function (data, callback) {
   bucket.remove(data.id, function (error, result) {
     if (error) {
+      return callback(error, null)
+    }
+    callback(null, result)
+  })
+}
+
+CategorieModel.getAllArticlesByCategories = function (categorie, callback) {
+  const statement = 'SELECT META(articles).id, articles.*' +
+   'FROM `' + bucket._name + '` AS articles WHERE articles.type = "articles" AND articles.categorie= `' + categorie + '`'
+  const query = N1qlQuery.fromString(statement)
+  bucket.query(query, function (error, result) {
+    if (error) {
+      console.log(error)
       return callback(error, null)
     }
     callback(null, result)
