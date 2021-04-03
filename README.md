@@ -16,6 +16,10 @@ const bucket = cluster.openBucket("votre_nombucket");
 
 cbbackup http://localhost:8091 technique_backup -u Ibrahima -p password -b technique
 
+#import de la base de donnees
+
+cbdocloader -c loclalhost:8091 -u Administrator -p password -b nomdubucket -m bucket-quota-MB -d fichieraimporter
+
 # installer les dependences de chacun des dossiers frontend et backend
 npm install
 
