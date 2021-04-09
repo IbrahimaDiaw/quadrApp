@@ -33,4 +33,13 @@ ArticlesModel.create = function (data, callback) {
     callback(null, articles)
   })
 }
+
+ArticlesModel.getArticlesById = function (data, callback) {
+  bucket.get(data.id, function (error, result) {
+    if (error) {
+      return callback(error, null)
+    }
+    callback(null, result.value)
+  })
+}
 module.exports = ArticlesModel

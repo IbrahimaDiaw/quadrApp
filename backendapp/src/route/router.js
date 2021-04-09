@@ -49,8 +49,8 @@ const appRouter = function (app) {
     })
   })
 
-  app.post('/categorie/delete/:id', function (req, res) {
-    CategorieModel.deleteCategorieById(req.params.id, function (error, result) {
+  app.post('/categorie/delete/:categorieId', function (req, res) {
+    CategorieModel.deleteCategorieById(req.params.categorieId, function (error, result) {
       if (error) {
         return res.status(400).send(error)
       }
@@ -85,8 +85,17 @@ const appRouter = function (app) {
     })
   })
 
-  app.get('/articles/categories/:id', function (req, res) {
-    CategorieModel.getAllArticlesByCategories(req.params, function (error, result) {
+  app.get('/articles/categories/:categorie', function (req, res) {
+    CategorieModel.getAllArticlesByCategories(req.params.categorie, function (error, result) {
+      if (error) {
+        return res.status(400).send(error)
+      }
+      res.send(result)
+    })
+  })
+
+  app.get('/articles/:id', function (req, res) {
+    ArticlesModel.getArticlesById(req.params, function (error, result) {
       if (error) {
         return res.status(400).send(error)
       }

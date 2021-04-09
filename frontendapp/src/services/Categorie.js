@@ -19,5 +19,9 @@ class CategorieService {
       delete(id) {
         return Api().delete(`/categories/${id}`);
       }
+
+      getArticleByCategorie(id){
+        return Api().get(`/articles/categories/${id}`);
+      }
 }
 export default new CategorieService();

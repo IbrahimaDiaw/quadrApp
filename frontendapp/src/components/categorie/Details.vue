@@ -14,13 +14,13 @@
     </b-container-fluid>
     <b-container>
             <div class="card" id="categorie">
-              <div class="card-body">
-                <h5>{{categories.nom}}</h5>
+              <div class="card-header"><h5>{{categories.nom}}</h5></div>
                 <div v-for="(article, i) in articles" :key="i">
-                    <div v-if="article.categorie[i]==categories.id">
-                        <span> {{article.nom}}</span>
+                  <router-link :to="{name: 'DetailsArticles', params:{id: article.id}}">
+                    <div class="card-body">
+                      <span> {{article.nom}}</span>
                     </div>
-                </div>
+                  </router-link>
                 </div>
             </div>
     </b-container>
@@ -30,17 +30,16 @@
 <script>
 /* eslint-disable */
 import CategorieService from '@/services/Categorie'
-import ArticlesService from '@/services/Articles' 
 export default {
   data() {
     return {
       categories:[],
-      articles:[]
+      articlescat:[]
     }
   },
   async mounted() {
+    this.articles = (await CategorieService.getArticleByCategorie(this.$route.params.id)).data
     this.categories = (await CategorieService.get(this.$route.params.id)).data
-    this.articles = (await ArticlesService.getAll()).data
   }
 }
 </script>
