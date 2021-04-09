@@ -13,23 +13,23 @@
         </div>
     </b-container-fluid>
     <b-container>
-            <div class="card" id="categorie">
-              <div class="card-header" id="card-header">
-                <h5><strong>{{categories.nom}}</strong></h5>
-                <label v-for="(nbre, index) in nombre" :key="index"> {{nbre.nombre}} articles dans cette categorie</label>
-              </div> 
-              <div v-for="(article, i) in articles" :key="i">
-                <router-link :to="{name: 'DetailsArticles', params:{id: article.id}}">
-                  <div class="card-body">
-                    <div class="card bg-light">
-                      <div class="card-body">
-                          <span> {{article.nom}}</span>
-                      </div>
-                    </div>
-                  </div>
-                </router-link>
+      <div class="card" id="categorie">
+        <div class="card-header" id="card-header">
+          <h5><strong>{{categories.nom}}</strong></h5>
+          <label v-for="(nbre, index) in nombre" :key="index"> {{nbre.nombre}} articles dans cette categorie</label>
+        </div>
+        <div v-for="(article, i) in articles" :key="i">
+          <router-link :to="{name: 'DetailsArticles', params:{id: article.id}}">
+            <div class="card-body">
+              <div class="card bg-light">
+                <div class="card-body">
+                    <span> {{article.nom}}</span>
+                </div>
               </div>
             </div>
+          </router-link>
+        </div>
+      </div>
     </b-container>
   </div>
 </template>

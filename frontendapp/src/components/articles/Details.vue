@@ -17,7 +17,7 @@
             <div class="card-header" id="card-header">
                 <h5><strong>{{article.nom}}</strong></h5>
                 <label class="text-title"> {{article.created_at}}</label>
-            </div> 
+            </div>
             <div class="card-body">
                 <div class="card-text">{{article.contenu}}</div>
             </div>

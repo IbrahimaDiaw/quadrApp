@@ -23,7 +23,7 @@
                             <label for="input-none">Contenu de l'article :</label>
                             </b-col>
                             <b-col sm="9">
-                            <b-form-input id="input-none" v-model="article.contenu" placeholder="Nom Article"></b-form-input>
+                            <b-form-textarea id="textarea-rows" rows="8" v-model="article.contenu" placeholder="Contenu de l'Article"></b-form-textarea>
                             </b-col>
                         </b-row>
                         <b-row>

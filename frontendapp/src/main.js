@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
-import { BootstrapVue, IconsPlugin, CardPlugin, FormPlugin, FormInputPlugin, FormSelectPlugin, FormGroupPlugin } from 'bootstrap-vue'
+import { BootstrapVue, IconsPlugin, FormTextareaPlugin, CardPlugin, FormPlugin, FormInputPlugin, FormSelectPlugin, FormGroupPlugin } from 'bootstrap-vue'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -20,6 +20,7 @@ Vue.use(FormPlugin)
 Vue.use(FormInputPlugin)
 Vue.use(FormGroupPlugin)
 Vue.use(FormSelectPlugin)
+Vue.use(FormTextareaPlugin)
 Vue.use(Vuetify)
 
 Vue.config.productionTip = false
