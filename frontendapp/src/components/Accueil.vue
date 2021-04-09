@@ -1,5 +1,5 @@
-<template>
-  <div>
+<template class="bg-light">
+  <div >
     <b-container-fluid class="bv-example-row">
         <div class="card bg-primary mb-3">
           <div class="card-body text-center">
@@ -15,7 +15,7 @@
     <b-container>
         <div v-for="categorie in categories" v-bind:key="categorie.id" >
           <router-link :to="{name:'DetailsCategorie',  params: { id: categorie.id }}">
-            <div class="card" id="categorie">
+            <div class="card mb-3" id="categorie">
               <div class="card-body">
                 <h5>{{categorie.nom}}</h5>
                 </div>

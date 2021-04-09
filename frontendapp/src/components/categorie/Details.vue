@@ -14,14 +14,21 @@
     </b-container-fluid>
     <b-container>
             <div class="card" id="categorie">
-              <div class="card-header"><h5>{{categories.nom}}</h5></div>
-                <div v-for="(article, i) in articles" :key="i">
-                  <router-link :to="{name: 'DetailsArticles', params:{id: article.id}}">
-                    <div class="card-body">
-                      <span> {{article.nom}}</span>
+              <div class="card-header" id="card-header">
+                <h5><strong>{{categories.nom}}</strong></h5>
+                <label v-for="(nbre, index) in nombre" :key="index"> {{nbre.nombre}} articles dans cette categorie</label>
+              </div> 
+              <div v-for="(article, i) in articles" :key="i">
+                <router-link :to="{name: 'DetailsArticles', params:{id: article.id}}">
+                  <div class="card-body">
+                    <div class="card bg-light">
+                      <div class="card-body">
+                          <span> {{article.nom}}</span>
+                      </div>
                     </div>
-                  </router-link>
-                </div>
+                  </div>
+                </router-link>
+              </div>
             </div>
     </b-container>
   </div>
@@ -34,12 +41,14 @@ export default {
   data() {
     return {
       categories:[],
-      articlescat:[]
+      articles:[],
+      nombre: []
     }
   },
   async mounted() {
     this.articles = (await CategorieService.getArticleByCategorie(this.$route.params.id)).data
     this.categories = (await CategorieService.get(this.$route.params.id)).data
+    this.nombre = (await CategorieService.getNbreArticle(this.$route.params.id)).data
   }
 }
 </script>
@@ -48,6 +57,9 @@ export default {
     margin-left: 200px;
     margin-right: 200px ;
     
+  }
+  #card-header{
+    padding-left:50px;
   }
   
 </style>

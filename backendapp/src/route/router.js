@@ -94,6 +94,15 @@ const appRouter = function (app) {
     })
   })
 
+  app.get('/nbrearticles/categories/:categorie', function (req, res) {
+    CategorieModel.countNbreArticleByCategorie(req.params.categorie, function (error, result) {
+      if (error) {
+        return res.status(400).send(error)
+      }
+      res.send(result)
+    })
+  })
+
   app.get('/articles/:id', function (req, res) {
     ArticlesModel.getArticlesById(req.params, function (error, result) {
       if (error) {

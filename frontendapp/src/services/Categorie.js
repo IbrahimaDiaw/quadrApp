@@ -23,5 +23,9 @@ class CategorieService {
       getArticleByCategorie(id){
         return Api().get(`/articles/categories/${id}`);
       }
+
+      getNbreArticle(id){
+        return Api().get(`/nbrearticles/categories/${id}`)
+      }
 }
 export default new CategorieService();

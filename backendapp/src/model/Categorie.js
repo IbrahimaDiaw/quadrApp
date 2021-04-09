@@ -63,4 +63,17 @@ CategorieModel.getAllArticlesByCategories = function (categorie, callback) {
     callback(null, result)
   })
 }
+
+CategorieModel.countNbreArticleByCategorie = function (categorie, callback) {
+  const statement = 'SELECT COUNT(*) AS nombre FROM `' + bucket._name + '` as articles ' +
+   'WHERE ANY cat IN articles.categorie SATISFIES lower(cat) = ? END'
+  const query = N1qlQuery.fromString(statement)
+  bucket.query(query, [categorie], function (error, result) {
+    if (error) {
+      console.log(error)
+      return callback(error, null)
+    }
+    callback(null, result)
+  })
+}
 module.exports = CategorieModel
