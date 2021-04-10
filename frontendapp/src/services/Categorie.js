@@ -16,8 +16,9 @@ class CategorieService {
       update(id, data) {
         return Api().put(`/categories/${id}`, data);
       }
-      delete(id) {
-        return Api().delete(`/categories/${id}`);
+
+      deleteCategorie(id) {
+        return Api().delete(`/categories/delete/${id}`);
       }
 
       getArticleByCategorie(id){

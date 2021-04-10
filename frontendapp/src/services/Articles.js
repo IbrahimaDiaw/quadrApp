@@ -19,7 +19,7 @@ class ArticlesService {
       }
     
       delete(id) {
-        return Api().delete(`/articles/${id}`);
+        return Api().delete(`/articles/delete/${id}`);
       }
     
 }

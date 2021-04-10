@@ -33,8 +33,8 @@
                             <tr v-for="categorie in categories" :key="categorie.id">
                                 <td>{{ categorie.nom }}</td>
                                 <td>{{ categorie.created_at }}</td>
-                                <td><router-link :to="{name: 'UpdateCategorie', params: { id: categorie._id }}" class="btn btn-primary">Edit</router-link>
-                                <button class="btn btn-danger">Delete</button></td>
+                                <td><router-link :to="{name: 'UpdateCategorie', params: { id: categorie.id }}" class="btn btn-primary">Edit</router-link>
+                                <button class="btn btn-danger" @click.prevent="deleteCatgorie(categorie.id)">Delete</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -47,10 +47,27 @@
 <script>
 /* eslint-disable */
 import CategorieService from '@/services/Categorie'
+import SweetAlert from 'sweetalert2'
+
+const Swal = SweetAlert
 export default {
     methods: {
         create(){
             this.$router.push({name: "CreateCategorie"});
+        },
+        deleteCatgorie(id){
+            if(confirm("Etes vous sur de vouloir supprimer cet article")){
+                this.CategorieService.deleteCategorie(id).then(response =>{
+                    this.categories.splice(this.categories.indexOf(id),1)
+                })
+                Swal.fire({
+                position: 'middle',
+                icon: 'success',
+                title: 'Operation effectuee avec succes',
+                showConfirmButton: false,
+                timer: 1500
+                })
+            }
         }
     },
     data () {

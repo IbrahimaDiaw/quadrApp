@@ -34,7 +34,7 @@
                                 <td>{{ article.nom }}</td>
                                 <td>{{ article.created_at }}</td>
                                 <td><router-link :to="{name: 'UpdateArticles', params: { id: article.id }}" class="btn btn-primary">Edit</router-link>
-                                <button class="btn btn-danger">Delete</button></td>
+                                <button class="btn btn-danger" v-on:click="deleteArticle(article.id)">Delete</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -51,6 +51,11 @@ export default {
     methods: {
         create(){
             this.$router.push({name: "CreateArticles"});
+        },
+        deleteArticle(id){
+            if(confirm("Etes vous sur de vouloir supprimer cet article")){
+                this.ArticlesService.delete(id) 
+            }
         }
     },
     data () {

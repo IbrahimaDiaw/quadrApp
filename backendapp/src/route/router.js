@@ -49,7 +49,7 @@ const appRouter = function (app) {
     })
   })
 
-  app.post('/categorie/delete/:categorieId', function (req, res) {
+  app.post('/categories/delete/:categorieId', function (req, res) {
     CategorieModel.deleteCategorieById(req.params.categorieId, function (error, result) {
       if (error) {
         return res.status(400).send(error)
@@ -105,6 +105,15 @@ const appRouter = function (app) {
 
   app.get('/articles/:id', function (req, res) {
     ArticlesModel.getArticlesById(req.params, function (error, result) {
+      if (error) {
+        return res.status(400).send(error)
+      }
+      res.send(result)
+    })
+  })
+
+  app.post('/articles/delete/:articleId', function (req, res) {
+    ArticlesModel.deleteById(req.params.articleId, function (error, result) {
       if (error) {
         return res.status(400).send(error)
       }

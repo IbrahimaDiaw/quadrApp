@@ -42,4 +42,13 @@ ArticlesModel.getArticlesById = function (data, callback) {
     callback(null, result.value)
   })
 }
+
+ArticlesModel.deleteById = function (articleId, callback) {
+  bucket.remove(articleId, function (error, result) {
+    if (error) {
+      return callback(error, null)
+    }
+    callback(null, result.value)
+  })
+}
 module.exports = ArticlesModel
