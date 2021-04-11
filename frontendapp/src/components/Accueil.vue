@@ -6,7 +6,7 @@
             <form class="container" >
               <div class="form-group" id="instant_search">
                 <h2 for="help" style="color:white"> Comment pouvons-nous vous aider ?</h2>
-                <input class="form-control" type="text" v-model="searchQuery" placeholder="rechercher" />
+                <input class="form-control" type="text" v-model="searchQuery" placeholder="rechercher par nom de la categorie" />
               </div>
             </form>
           </div>

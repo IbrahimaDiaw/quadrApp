@@ -16,7 +16,7 @@
         <div class="card" id="categorie">
             <div class="card-header" id="card-header">
                 <h5><strong>{{article.nom}}</strong></h5>
-                <label class="text-title"> {{article.created_at}}</label>
+                <label class="text-title">publié le {{ format_date(article.created_at)}}</label>
             </div>
             <div class="card-body">
                 <div class="card-text">{{article.contenu}}</div>
@@ -29,6 +29,7 @@
 <script>
 /* eslint-disable */
 import ArticlesService from '@/services/Articles'
+import moment from 'moment'
 export default {
   data() {
     return {
@@ -37,6 +38,13 @@ export default {
   },
   async mounted() {
     this.article = (await ArticlesService.get(this.$route.params.id)).data
+  },
+  methods: {
+    format_date(value){
+         if (value) {
+           return moment(String(value)).format('DD-MM-YYYY hh:mm')
+          }
+      }
   }
 }
 </script>

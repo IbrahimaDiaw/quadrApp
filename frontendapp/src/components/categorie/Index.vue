@@ -32,7 +32,7 @@
                         <tbody>
                             <tr v-for="categorie in categories" :key="categorie.id">
                                 <td>{{ categorie.nom }}</td>
-                                <td>{{ categorie.created_at }}</td>
+                                <td>{{ format_date(categorie.created_at) }}</td>
                                 <td><router-link :to="{name: 'UpdateCategorie', params: { id: categorie.id }}" class="btn btn-primary">Edit</router-link>
                                 <button class="btn btn-danger" @click.prevent="deleteCatgorie(categorie.id)">Delete</button></td>
                             </tr>
@@ -48,6 +48,7 @@
 /* eslint-disable */
 import CategorieService from '@/services/Categorie'
 import SweetAlert from 'sweetalert2'
+import moment from 'moment'
 
 const Swal = SweetAlert
 export default {
@@ -57,7 +58,7 @@ export default {
         },
         deleteCatgorie(id){
             if(confirm("Etes vous sur de vouloir supprimer cet article")){
-                this.CategorieService.deleteCategorie(id).then(response =>{
+                this.CategorieService.deleteCategorie(id).then(() =>{
                     this.categories.splice(this.categories.indexOf(id),1)
                 })
                 Swal.fire({
@@ -68,7 +69,12 @@ export default {
                 timer: 1500
                 })
             }
-        }
+        },
+        format_date(value){
+         if (value) {
+           return moment(String(value)).format('DD-MM-YYYY hh:mm')
+          }
+      }
     },
     data () {
         return {

@@ -32,7 +32,7 @@
                         <tbody>
                             <tr v-for="article in articles" :key="article.id">
                                 <td>{{ article.nom }}</td>
-                                <td>{{ article.created_at }}</td>
+                                <td>{{ format_date(article.created_at) }}</td>
                                 <td><router-link :to="{name: 'UpdateArticles', params: { id: article.id }}" class="btn btn-primary">Edit</router-link>
                                 <button class="btn btn-danger" v-on:click="deleteArticle(article.id)">Delete</button></td>
                             </tr>
@@ -47,6 +47,7 @@
 <script>
 /* eslint-disable */
 import ArticlesService from '@/services/Articles'
+import moment from 'moment'
 export default {
     methods: {
         create(){
@@ -56,7 +57,12 @@ export default {
             if(confirm("Etes vous sur de vouloir supprimer cet article")){
                 this.ArticlesService.delete(id) 
             }
-        }
+        },
+        format_date(value){
+         if (value) {
+           return moment(String(value)).format('DD-MM-YYYY hh:mm')
+          }
+      }
     },
     data () {
         return {
