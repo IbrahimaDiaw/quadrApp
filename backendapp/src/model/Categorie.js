@@ -52,7 +52,7 @@ CategorieModel.deleteCategorieById = function (categorieId, callback) {
 }
 
 CategorieModel.getAllArticlesByCategories = function (categorie, callback) {
-  const statement = 'SELECT META(articles).id, articles.nom, articles.contenu FROM  `' + bucket._name + '` as articles ' +
+  const statement = 'SELECT META(articles).id, articles.nom, articles.contenu, articles.created_at FROM  `' + bucket._name + '` as articles ' +
    'WHERE ANY cat IN articles.categorie SATISFIES lower(cat) = ? END'
   const query = N1qlQuery.fromString(statement)
   bucket.query(query, [categorie], function (error, result) {
@@ -77,16 +77,16 @@ CategorieModel.countNbreArticleByCategorie = function (categorie, callback) {
   })
 }
 
-CategorieModel.Categories = function (callback) {
-  const statement = 'SELECT categorie.nom, ' +
-                  '(SELECT nom, contenu FROM `' + bucket._name + '` AS article WHERE ANY cat IN article.categorie SATISFIES lower(cat) = META(categorie).id) AS articles FROM `' + bucket._name + '` AS categorie WHERE categorie.type="categorie"'
-  const query = N1qlQuery.fromString(statement)
-  bucket.query(query, function (error, result) {
-    if (error) {
-      console.log(error)
-      return callback(error, null)
-    }
-    callback(null, result)
-  })
-}
+// CategorieModel.Categories = function (callback) {
+//   const statement = 'SELECT categorie.nom' +
+//                   'FROM `' + bucket._name + '` AS articles `' + bucket._name + '` AS categorie  WHERE articles.type="articles" AND categorie="categorie"'
+//   const query = N1qlQuery.fromString(statement)
+//   bucket.query(query, function (error, result) {
+//     if (error) {
+//       console.log(error)
+//       return callback(error, null)
+//     }
+//     callback(null, result)
+//   })
+// }
 module.exports = CategorieModel

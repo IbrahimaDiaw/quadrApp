@@ -58,14 +58,14 @@ const appRouter = function (app) {
     })
   })
 
-  app.get('/categories/articles', function (req, res) {
-    CategorieModel.Categories(function (error, result) {
-      if (error) {
-        return res.status(400).send(error)
-      }
-      res.send(result)
-    })
-  })
+  // app.get('/categories/articles', function (req, res) {
+  //   CategorieModel.Categories(function (error, result) {
+  //     if (error) {
+  //       return res.status(400).send(error)
+  //     }
+  //     res.send(result)
+  //   })
+  // })
 
   // la partie qui gere les articles
   app.get('/articles', function (req, res) {
