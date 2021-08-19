@@ -1,9 +1,9 @@
-## Build Setup
+## Build Setup 
 
 ``` bash
 
 
-# Confuguration du backend folder. Veuillez modifier le nom d'utilisateur par rapport au tien et le password aussi ainsi que le nom du bucket dans le fichier app.js de backend
+# Couchbase Confuguration du backend folder. Veuillez modifier le nom d'utilisateur par rapport au tien et le password aussi ainsi que le nom du bucket dans le fichier app.js de backend
 const cluster = new couchbase.Cluster("couchbase://localhost");
 cluster.authenticate('votre_username', 'password')
 const bucket = cluster.openBucket("votre_nombucket");
